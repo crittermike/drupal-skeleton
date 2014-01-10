@@ -1,0 +1,36 @@
+name = Skeleton
+description = A base install profile meant to be altered.
+core = 7.x
+
+; Core Modules
+dependencies[] = block
+dependencies[] = field_ui
+dependencies[] = dblog
+
+; Contrib Modules
+dependencies[] = devel
+dependencies[] = xautoload
+dependencies[] = configuration
+dependencies[] = configuration_ui
+
+; Panopoly Foundation
+dependencies[] = panopoly_core
+dependencies[] = panopoly_images
+dependencies[] = panopoly_theme
+dependencies[] = panopoly_magic
+dependencies[] = panopoly_widgets
+dependencies[] = panopoly_admin
+dependencies[] = panopoly_users
+
+; Panopoly Toolset
+dependencies[] = panopoly_pages
+dependencies[] = panopoly_search
+dependencies[] = panopoly_wysiwyg
+
+; Panopoly Admin
+dependencies[] = navbar
+dependencies[] = backports
+dependencies[] = simplified_menu_admin
+dependencies[] = save_draft
+dependencies[] = module_filter
+dependencies[] = date_popup_authored
