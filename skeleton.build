@@ -3,4 +3,7 @@ api = 2
 projects[drupal][type] = "core"
 
 ; Our distribution
-includes[skeleton] = "skeleton.make"
+projects[skeleton][type] = "profile"
+projects[skeleton][download][type] = "git"
+projects[skeleton][download][url] = "ssh://git@github.com:example/repo.git"
+projects[skeleton][download][branch] = "develop"
