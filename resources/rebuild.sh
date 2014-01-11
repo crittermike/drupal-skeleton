@@ -59,6 +59,10 @@ The following operations will be done:
  3. Optionally re-install the skeleton install profile in $DRUPAL_ROOT
  4. Optionally create symlinks from your git repo in $D7_GIT_REPO
     to the new site directory in $DRUPAL_ROOT
+ 5. Run any necessary Drupal database updates.
+ 6. Re-sync configuration from data store to active store.
+
+If you have not already run "git pull" to fetch the latest code, you may want to stop this and do that now.
 
 EOF
 
@@ -70,10 +74,12 @@ echo 'Rebuilding the site...'
 echo 'Removing '$DRUPAL_ROOT' directory...'
 chmod a+w $DRUPAL_ROOT"/sites/default"
 chmod a+w $DRUPAL_ROOT"/sites/default/files"
+mv $DRUPAL_ROOT /tmp/drupal-rebuild-backup
 rm -rf $DRUPAL_ROOT
 echo 'Executing drush make'
 drush make --prepare-install --force-complete --working-copy ../skeleton.build $DRUPAL_ROOT -y
 echo 'Finished executing drush make'
+cp -r /tmp/drupal-rebuild-backup/sites/default/* $DRUPAL_ROOT"/sites/default"
 cd $DRUPAL_ROOT
 if prompt_yes_no "Do you want to re-install the database?" ; then
     echo 'Re-installing site database'
@@ -104,18 +110,12 @@ ln -s $D7_GIT_REPO"/modules/custom" $DRUPAL_ROOT"/profiles/skeleton/modules/cust
 ln -s $D7_GIT_REPO"/themes/skeleton" $DRUPAL_ROOT"/profiles/skeleton/themes/skeletontheme"
 echo 'Done making symlinks.'
 
-echo 'Setting date and timezone settings...'
-drush vset date_first_day 1 -y
-drush vset date_default_timezone 'America/New_York' -y
-drush vset date_api_use_iso8601 0 -y
-drush vset site_default_country 'US' -y
-drush vset configurable_timezones 0 -y
-drush vset user_default_timezone 0 -y
+echo 'Running any necessary Drupal database updates'
+drush updb
 echo 'Done.'
-# Run cron to make sure any initialization necessary in Drupal takes place before
-# nodes are imported.
-echo 'Running cron...'
-drush cron
+
+echo 'Syncing configuration from data store to active store.'
+drush config-sync
 echo 'Done.'
 
 echo 'Rebuild completed.'
