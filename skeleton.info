@@ -7,6 +7,9 @@ dependencies[] = block
 dependencies[] = field_ui
 dependencies[] = dblog
 
+; Custom Modules
+dependencies[] = skeleton_core
+
 ; Contrib Modules
 dependencies[] = devel
 dependencies[] = xautoload

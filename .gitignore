@@ -1,1 +1,6 @@
 resources/rebuild.config
+libraries/*
+modules/*
+!modules/custom
+themes/*
+!themes/webhosting

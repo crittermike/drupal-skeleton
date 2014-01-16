@@ -22,6 +22,9 @@ prompt_yes_no() {
  done
 }
 
+# cd to the location of the script
+cd "$(dirname "$0")"
+
 # Reading options from rebuild.config
 FILENAME=rebuild.config
 while read option
@@ -69,7 +72,8 @@ if ! prompt_yes_no "Are you sure you want to proceed?" ; then
 fi
 
 echo 'Rebuilding the site...'
-echo 'Removing '$DRUPAL_ROOT' directory'
+echo 'Removing old '$DRUPAL_ROOT' directory'
+mkdir $DRUPAL_ROOT 2>/dev/null
 chmod a+w $DRUPAL_ROOT"/sites/default" 2>/dev/null
 chmod a+w $DRUPAL_ROOT"/sites/default/files" 2>/dev/null
 
@@ -85,7 +89,7 @@ cd $DRUPAL_ROOT
 
 if prompt_yes_no "Do you want to re-install the database?" ; then
     echo 'Re-installing site database'
-    drush si skeleton --site-name="skeleton" --db-url="mysql://$DB_USER:$DB_PASS@localhost/$DB_NAME" -y
+    drush si skeleton --site-name="New Drupal Site" --db-url="mysql://$DB_USER:$DB_PASS@localhost/$DB_NAME" -y
     echo 'Done re-installing site database'
 fi
 
