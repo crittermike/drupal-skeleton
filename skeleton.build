@@ -5,5 +5,5 @@ projects[drupal][type] = "core"
 ; Our distribution
 projects[skeleton][type] = "profile"
 projects[skeleton][download][type] = "git"
-projects[skeleton][download][url] = "ssh://git@github.com:example/repo.git"
+projects[skeleton][download][url] = "ssh://git@github.com:mikecrittenden/drupal-skeleton.git"
 projects[skeleton][download][branch] = "develop"
