@@ -1,12 +1,12 @@
 <?php
 
 /**
- * Enable the Configuration modules.
+ * Put description of update hook here. It's displayed when the update runs.
  */
+/* UNCOMMENT THIS WHEN NEEDED. JUST USED AS EXAMPLE FOR NOW.
 function skeleton_core_update_7001() {
-  module_enable(array('configuration', 'configuration_ui'));
+  module_enable(array('module1name', 'module2name'));
 }
+*/
 
-/**
- * Add new modules here as separate install hooks.
- */
+/* Add new modules here using the update hook format above. */

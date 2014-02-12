@@ -12,9 +12,6 @@ dependencies[] = skeleton_core
 
 ; Contrib Modules
 dependencies[] = devel
-dependencies[] = xautoload
-dependencies[] = configuration
-dependencies[] = configuration_ui
 
 ; Panopoly Foundation
 dependencies[] = panopoly_core

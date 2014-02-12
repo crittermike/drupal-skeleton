@@ -61,7 +61,7 @@ The following operations will be done:
  2. Rebuild the Drupal directory in $DRUPAL_ROOT
  3. Optionally re-install the install profile in $DRUPAL_ROOT
  4. Run any necessary Drupal database updates.
- 5. Re-sync configuration from data store to active store.
+ 5. Revert all Features to their default state.
 
 If you have not already run "git pull" to fetch the latest code, you may want to stop this and do that now.
 
@@ -86,19 +86,24 @@ cp -rf /tmp/drupal-rebuild-backup/sites/default/* $DRUPAL_ROOT"/sites/default" 2
 echo 'Finished executing drush make'
 
 cd $DRUPAL_ROOT
+clear
 
-if prompt_yes_no "Do you want to re-install the database?" ; then
+if prompt_yes_no "Do you want to re-install the database?" ;
+then
     echo 'Re-installing site database'
-    drush si skeleton --site-name="New Drupal Site" --db-url="mysql://$DB_USER:$DB_PASS@localhost/$DB_NAME" -y
+    drush si skeleton --site-name="New Drupal Site" --db-url="mysql://$DB_USER:$DB_PASS@localhost/$DB_NAME" --account-pass="admin" -y
     echo 'Done re-installing site database'
+    clear
+    echo 'Rebuild completed! You can now log in using "admin" as both the username and the password.'
+else
+    if prompt_yes_no "Do you want to revert all Features to their default state, removing overrides?" ; then
+        echo 'Reverting all Features to their default state.'
+        drush fra
+        echo 'Done.'
+    fi
+    echo 'Running any necessary Drupal database updates'
+    drush updb
+    echo 'Done.'
+    echo 'Rebuild completed! Thanks! You rock!'
 fi
 
-echo 'Running any necessary Drupal database updates'
-drush updb
-echo 'Done.'
-
-echo 'Syncing configuration from data store to active store.'
-drush config-sync
-echo 'Done.'
-
-echo 'Rebuild completed!'
