@@ -1,4 +1,0 @@
-name = Web Hosting Core
-description = Shared, global functionality for Gaggle Web Hosting
-core = 7.x
-package = Gaggle

@@ -1,9 +1,0 @@
-<?php
-
-/**
- * Enable the Configuration modules.
- */
-function skeleton_core_update_7001() {
-  module_enable(array('configuration', 'configuration_ui'));
-}
-
